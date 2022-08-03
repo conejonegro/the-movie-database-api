@@ -1,0 +1,23 @@
+{
+  "name": "the-movie-database-api",
+  "version": "1.0.0",
+  "description": "Consumir api the movie database con Javascript",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/conejonegro/the-movie-database-api.git"
+  },
+  "keywords": [
+    "javascript",
+    "api"
+  ],
+  "author": "LuisRosales",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/conejonegro/the-movie-database-api/issues"
+  },
+  "homepage": "https://github.com/conejonegro/the-movie-database-api#readme"
+}
