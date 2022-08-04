@@ -6,7 +6,7 @@
 body{
     background-color: var(--first-color);
     color: #fff;
-    font-family: Montserrat;
+    font-family: Montserrat !important;
 }
 #search-box .input-group{
   max-width: 300px;
@@ -35,4 +35,7 @@ div.scrollmenu a:hover {
   justify-content: space-between;
   margin-top: 32px;
   margin-bottom: 32px;
+}
+.movie-container{
+  text-align: center;
 }
