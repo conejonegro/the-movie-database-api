@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/conejonegro/the-movie-database-api/issues"
   },
-  "homepage": "https://github.com/conejonegro/the-movie-database-api#readme"
+  "homepage": "https://github.com/conejonegro/the-movie-database-api#readme",
+  "dependencies": {
+    "bootstrap": "^5.2.0"
+  }
 }

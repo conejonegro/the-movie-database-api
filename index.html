@@ -8,10 +8,43 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <title>The movie Database app</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-    <h1>The Movie Database App</h1>
+    <h1 class="container">The Movie Database App</h1>
+
+    <section class="d-flex justify-content-end container" id="search-box">
+        <div class="input-group">
+            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+            <button type="button" class="btn btn-warning">search</button>
+        </div>
+    </section>
+
+    <section id="tendencias" class="container">
+        <h2>Tendencias</h2>
+        <button type="button" class="btn btn-primary">Ver Mas</button>
+    </section>
+
+    <div class="scrollmenu container">
+        <a href="#home"><img src="https://image.tmdb.org/t/p/w300/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg" alt=""/></a>
+        <a href="#home"><img src="https://image.tmdb.org/t/p/w300/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg" alt=""/></a>
+        <a href="#home"><img src="https://image.tmdb.org/t/p/w300/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg" alt=""/></a>
+        <a href="#home"><img src="https://image.tmdb.org/t/p/w300/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg" alt=""/></a>
+        <a href="#home"><img src="https://image.tmdb.org/t/p/w300/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg" alt=""/></a>
+      </div>
+
+      <section id="categorias" class="container">
+        <h2>Categorias</h2>
+        <ul>
+            <li>Suspenso</li>
+            <li>Drama</li>
+            <li>Terror</li>
+            <li>Psicologico</li>
+            <li>Fantasia</li>
+        </ul>
+      </section>
+
 
     <script src="./src/constantes.js"></script>
     <script src="./src/main.js"></script>
