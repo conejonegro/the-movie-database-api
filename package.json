@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/conejonegro/the-movie-database-api#readme",
   "dependencies": {
+    "axios": "^0.27.2",
     "bootstrap": "^5.2.0"
   }
 }

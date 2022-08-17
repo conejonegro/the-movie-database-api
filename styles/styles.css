@@ -1,6 +1,7 @@
 :root {
     --first-color: #488cff;
     --second-color: #ffff8c;
+    --inactive: none;
   }
 
 body{
@@ -9,7 +10,7 @@ body{
     font-family: Montserrat !important;
 }
 #search-box .input-group{
-  max-width: 300px;
+  justify-content: space-between;
 }
 
 div.scrollmenu {
@@ -30,12 +31,62 @@ div.scrollmenu a:hover {
   background-color: #777;
 }
 #tendencias{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   margin-top: 32px;
   margin-bottom: 32px;
 }
 .movie-container{
   text-align: center;
+}
+#categorias{
+  margin-top: 1em;
+}
+#id28{color: lavender;}
+#id12{color: lightblue;}
+#id16{color: lightcyan;}
+#id35{color: plum;}
+#id80{color: greenyellow;}
+#id99{color: lightgreen;}
+#id18{color: lightgrey;}
+#id10751{color: lightpink;}
+#id14{color: lightsalmon;}
+#id36{color: lightseagreen;}
+#id27{color: lightskyblue;}
+#id10402{color: lightsteelblue;}
+#id9648{color: tomato;}
+#id10749{color: linen;}
+#id878{color: lime;}
+#id10770{color: lightyellow;}
+#id53{color: lightsteelblue;}
+#id10752{color: springgreen;}
+#id37{color: purple;}
+
+
+#categorias a{
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+}
+#categorias ::marker{
+ 
+  font-size: 20px;
+}
+#trendsTitleButtonCont{
+    display: flex;
+    justify-content: space-between;
+    margin: 3em 0 2em;
+}
+
+.inactive{
+  display: var(--inactive) !important;
+}
+#generic_section{
+  margin-top:2em;
+  margin-bottom:2em;
+}
+#generic_section h2{
+  margin-bottom:.5em;
+}
+#generic_section img{
+  max-width: 250px;
 }
