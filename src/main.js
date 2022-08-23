@@ -4,7 +4,7 @@ const TRENDING_MOVIES_ENDPOINT = 'trending/movie/day';
 const GENRE_ENDPOINT = 'genre/movie/list';
 const POSTER_URL = 'https://image.tmdb.org/t/p/w200';
 const BY_GENRE_ENDPOINT = `discover/movie`;
-
+const MOVIES_BY_GENRE = 'discover/movie';
 
 
   async function getTrendingMovies(){
@@ -70,10 +70,11 @@ async function getGenreData(){
     const response = await fetch(`${URL}/${GENRE_ENDPOINT}?${API_KEY}`);
     const data = await response.json();
     const genresArray = data.genres;
-    const categoryContainer = document.getElementById('categorias');
+
+    categoriesSection.innerHTML = '';
     
     const ulElem = document.createElement('ul');
-    categoryContainer.appendChild(ulElem);
+    categoriesSection.appendChild(ulElem);
 
     genresArray.forEach(genre => {
 
@@ -81,19 +82,57 @@ async function getGenreData(){
 
         const liContainer = document.createElement('div');
         const liElem = document.createElement('li');
-        const aElem = document.createElement('a');
+        // const aElem = document.createElement('a');
 
         liElem.setAttribute('id', 'id'+genreId);
 
-        aElem.innerHTML = genre.name;
-        aElem.setAttribute('href', `${URL}/${BY_GENRE_ENDPOINT}?${API_KEY}&with_genres=${genreId}`);
+        liElem.addEventListener('click', () => { 
+            location.hash = `#category=${genreId}-${genre.name}`;
+            genericTitle.textContent = genre.name;
 
-        liElem.appendChild(aElem);
+            getMoviesByGenre();
+
+         })
+
+        liElem.innerHTML = genre.name;
+        // aElem.setAttribute('href', `${URL}/${BY_GENRE_ENDPOINT}?${API_KEY}&with_genres=${genreId}`);
+
+        // liElem.appendChild(aElem);
         ulElem.appendChild(liElem);
         
     });
     
 }
+
+
+async function getMoviesByGenre(){
+
+    const splitedText = location.hash.split('=');
+    // console.log(splitedText);
+    const secondSplit = splitedText[1].split('-');
+    const genreTitle = secondSplit[1];
+    const genreId = secondSplit[0];
+    // console.log(genreId);
+
+    const response = await fetch(`${URL}/${MOVIES_BY_GENRE}?${API_KEY}&with_genres=${genreId}`);
+    const data = await response.json();
+    const moviesByGenreArray = data.results;
+   
+    genericSection.innerHTML = '';
+    const genreTitleElem = document.createElement('h2');
+    genreTitleElem.innerHTML = genreTitle;
+    genericSection.appendChild(genreTitleElem);
+
+    moviesByGenreArray.forEach(movie => {
+
+        const imgElem = document.createElement('img');
+        genericSection.appendChild(imgElem);
+        imgElem.src = `${POSTER_URL}/${movie.poster_path}`;
+        
+    });
+
+}
+
 
 
 

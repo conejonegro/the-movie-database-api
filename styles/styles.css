@@ -61,11 +61,11 @@ div.scrollmenu a:hover {
 #id37{color: purple;}
 
 
-#categorias a{
-  text-decoration: none;
+#categorias li{
   font-size: 20px;
+  cursor: pointer;
   font-weight: 600;
-  color: white;
+  width: fit-content;
 }
 #categorias ::marker{
  
