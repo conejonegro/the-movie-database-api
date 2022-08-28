@@ -1,10 +1,9 @@
-search_btn.addEventListener('click', function searchBtn(){
+search_btn.addEventListener('click', () => {
 
-    
     const searchBtnValue = document.getElementById('input_value').value;
-    console.log(searchBtnValue);
+    // console.log(searchBtnValue);
     location.hash=`#search=${searchBtnValue}`;
-    searchView();
+    // searchView();
 
 });
 backArrow.addEventListener('click', function searchBtn(){
@@ -73,6 +72,8 @@ function searchView(){
     backArrow.classList.remove('inactive');
     inputGroup.classList.remove('justify-content-end');
     inputGroup.classList.add('justify-content-space-between');
+
+    searchMoviesByButton();
 }
 
 function movieDetailsView(){
@@ -86,8 +87,6 @@ function movieDetailsView(){
 
 function genericView(){
     console.log("Categories view");
-
-    
 
     searchBar.classList.remove('inactive');
     trendsSection.classList.add('inactive');

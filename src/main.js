@@ -5,6 +5,7 @@ const GENRE_ENDPOINT = 'genre/movie/list';
 const POSTER_URL = 'https://image.tmdb.org/t/p/w200';
 const BY_GENRE_ENDPOINT = `discover/movie`;
 const MOVIES_BY_GENRE = 'discover/movie';
+const SEARCH_MOVIE = 'search/movie';
 
 
   async function getTrendingMovies(){
@@ -130,6 +131,31 @@ async function getMoviesByGenre(){
         imgElem.src = `${POSTER_URL}/${movie.poster_path}`;
         
     });
+
+}
+
+async function  searchMoviesByButton(){
+
+    const splitedText = location.hash.split('=');
+    // console.log(splitedText);
+    const search_query = splitedText[1];
+    console.log(search_query);
+
+    const response = await fetch(`${URL}/${SEARCH_MOVIE}?${API_KEY}&query=${search_query}`);
+    const data = await response.json();
+    const moviesBySearchQuery = data.results;
+
+    genericSection.innerHTML = '';
+
+    moviesBySearchQuery.forEach(movie => {
+
+        const imgElem = document.createElement('img');
+        genericSection.appendChild(imgElem);
+        imgElem.src = `${POSTER_URL}/${movie.poster_path}`;
+        
+    });
+
+    console.log(data.results);
 
 }
 
