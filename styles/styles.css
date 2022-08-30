@@ -18,6 +18,9 @@ div.scrollmenu {
   overflow: auto;
   white-space: nowrap;
 }
+#horizontal-scrollmenu img{
+  cursor: pointer;
+}
 
 div.scrollmenu a {
   display: inline-block;

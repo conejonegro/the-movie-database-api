@@ -8,6 +8,7 @@ search_btn.addEventListener('click', () => {
 });
 backArrow.addEventListener('click', function searchBtn(){
     console.log('backArrow detected');
+    history.back();
 
     location.hash='#home';
     const valueVar = document.getElementById('input_value');
@@ -17,7 +18,8 @@ backArrow.addEventListener('click', function searchBtn(){
     
 });
 seeMoreBtn.addEventListener('click', function(){ 
-    trendsPage()
+    location.hash='#trends';
+    trendsPage();
    
 });
 
@@ -49,9 +51,7 @@ function navigator(){
 
 function trendsPage(){
     console.log("TrendsView");
-    location.hash='#trends';
-    
-
+    // 
     searchBar.classList.remove('inactive');
     trendsSection.classList.add('inactive');
     categoriesSection.classList.add('inactive');
@@ -59,6 +59,8 @@ function trendsPage(){
     backArrow.classList.remove('inactive');
     inputGroup.classList.remove('justify-content-end');
     inputGroup.classList.add('justify-content-space-between');
+
+    getMoviesByTrend();
 
 }
 
@@ -79,10 +81,25 @@ function searchView(){
 function movieDetailsView(){
     console.log("Movie Detail View");
 
+   
+    backArrow.classList.remove('inactive');
     searchBar.classList.remove('inactive');
     trendsSection.classList.add('inactive');
     categoriesSection.classList.add('inactive');
     genericSection.classList.add('inactive');
+
+    movieDetailSection.classList.remove('inactive');
+    inputGroup.classList.remove('justify-content-end');
+    inputGroup.classList.add('justify-content-space-between');
+
+    movieDetailPoster.innerHTML = '';
+
+    const splitedText = location.hash.split('=');
+    // console.log(splitedText);
+    const movie_id = splitedText[1];
+    getMovieDetails(movie_id);
+
+ 
 }
 
 function genericView(){
@@ -116,6 +133,8 @@ function homePage(){
     genericSection.classList.add('inactive');
     backArrow.classList.add('inactive');
     inputGroup.classList.add('justify-content-end');
+
+    movieDetailSection.classList.add('inactive');
 
     getTrendingMovies();
     getGenreData();

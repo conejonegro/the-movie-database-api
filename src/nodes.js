@@ -11,3 +11,9 @@ const seeMoreBtn = document.querySelector('#tendencias .btn');
 
 const genericTitle = document.querySelector('#generic_section h2');
 
+const movieDetailSection = document.getElementById('movie_detail');
+const movieDetailPoster = document.getElementById('background_poster');
+const movieDetailTitle = document.querySelector('.movie-title');
+const movieDescription = document.querySelector('.movie-description');
+const movieDetailCategories = document.querySelector('#movie_detail_categories');
+
