@@ -10,11 +10,17 @@ backArrow.addEventListener('click', function searchBtn(){
     console.log('backArrow detected');
     history.back();
 
-    location.hash='#home';
-    const valueVar = document.getElementById('input_value');
-    // valueVar.value = ' ';
+    if(location.hash == '#home' || location.hash == '/'){
+        location.hash='#home';
+        const valueVar = document.getElementById('input_value');
+        valueVar.ariaPlaceholder = 'Search';
+        valueVar.setAttribute("placeholder", "Search");
+        valueVar.value = ' ';
+    
+        homePage();
+    }
 
-    homePage();
+  
     
 });
 seeMoreBtn.addEventListener('click', function(){ 
@@ -81,7 +87,6 @@ function searchView(){
 function movieDetailsView(){
     console.log("Movie Detail View");
 
-   
     backArrow.classList.remove('inactive');
     searchBar.classList.remove('inactive');
     trendsSection.classList.add('inactive');
@@ -103,7 +108,7 @@ function movieDetailsView(){
 }
 
 function genericView(){
-    console.log("Categories view");
+    console.log("Categories Generic view");
 
     searchBar.classList.remove('inactive');
     trendsSection.classList.add('inactive');
@@ -112,6 +117,8 @@ function genericView(){
     backArrow.classList.remove('inactive');
     inputGroup.classList.remove('justify-content-end');
     inputGroup.classList.add('justify-content-space-between');
+
+    movieDetailSection.classList.add('inactive');
 
     if(location.hash.startsWith('#category=')){
         

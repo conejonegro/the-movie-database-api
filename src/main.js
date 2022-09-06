@@ -8,95 +8,41 @@ const MOVIES_BY_GENRE = 'discover/movie';
 const SEARCH_MOVIE = 'search/movie';
 const MOVIE_DETAILS_ENDPOINT = 'movie'
 
-// API CALLS
-  async function getTrendingMovies(){
+// RESOURSES
+// https://takeout85.github.io/movie-app
+// https://devnielote.github.io/quick-watch/#
+// https://khisus19moviefinder.netlify.app/index.html
 
-            try {
-                const response = await axios.get(`${URL}/${TRENDING_MOVIES_ENDPOINT}?${API_KEY}`);
-                const movies = response.data.results;
-                    movies.forEach(movie => {
-                       
-                        const divElement = document.createElement('div');
-                        divElement.classList.add('movie-container');
+// REUSABLE FUNCTIONS // UTILS 
+function getAndDisplayMoviePosters(posterPath, sectionToAppend, movieId) { 
 
-                        horizontalMenu.appendChild(divElement);
+    const imgElem = document.createElement('img');
+    imgElem.src = `${POSTER_URL}/${posterPath}`;
+    sectionToAppend.appendChild(imgElem);
 
-                        const imgElem = document.createElement('img');
-                        divElement.appendChild(imgElem);
-                        imgElem.src = `${POSTER_URL}/${movie.poster_path}`;
+    imgElem.addEventListener('click', () => { 
+        location.hash=`#movie=${movieId}`;
+        console.log("clicked");
+        // getMovieDetails(movie.id);
+     })
 
-                        const trendingMovieTitle = document.createElement('h6');
-                        trendingMovieTitle.innerHTML = movie.title;
-                        divElement.appendChild(trendingMovieTitle);
+}
 
-                        imgElem.addEventListener('click', () => { 
-                            location.hash=`#movie=${movie.id}`;
-                            // getMovieDetails(movie.id);
-                         })
+function createCategoriesList(sectionToAppend, genresArray){
 
-                    });
-            } 
-            catch (error) {
-                console.error(error);
-            }
-
-  }
-
-// Same Function as Above BUT USING FETCH!!!
-// async function getTrendingMovies(){
-//     const response = await fetch(`${URL}/${TRENDING_MOVIES_ENDPOINT}?${API_KEY}`);
-//     const data = await response.json();
-//     const movies = data.results;
-
-//     movies.forEach(movie => {
-//         // console.log(movie);
-
-//         const horizontalMenu = document.getElementById('horizontal-scrollmenu');
-//         const divElement = document.createElement('div');
-//         divElement.classList.add('movie-container');
-
-//         horizontalMenu.appendChild(divElement);
-
-//         const imgElem = document.createElement('img');
-//         divElement.appendChild(imgElem);
-//         imgElem.src = `${POSTER_URL}/${movie.poster_path}`;
-
-//         const trendingMovieTitle = document.createElement('h6');
-//         trendingMovieTitle.innerHTML = movie.title;
-//         divElement.appendChild(trendingMovieTitle);
-
-        
-
-//     });
-
-// }
-
-
-async function getGenreData(){
-
-    const response = await fetch(`${URL}/${GENRE_ENDPOINT}?${API_KEY}`);
-    const data = await response.json();
-    const genresArray = data.genres;
-
-    categoriesSection.innerHTML = '';
-    
     const ulElem = document.createElement('ul');
-    categoriesSection.appendChild(ulElem);
+    sectionToAppend.appendChild(ulElem);
 
     genresArray.forEach(genre => {
-
         const genreId = genre.id
-
-        const liContainer = document.createElement('div');
         const liElem = document.createElement('li');
         // const aElem = document.createElement('a');
 
-        liElem.setAttribute('id', 'id'+genreId);
+        liElem.setAttribute('id', 'id'+ genreId);
 
         liElem.addEventListener('click', () => { 
             location.hash = `#category=${genreId}-${genre.name}`;
-            genericTitle.textContent = genre.name;
-
+            // genericTitle.innerHTML = genre.name;
             getMoviesByGenre();
 
          })
@@ -108,7 +54,43 @@ async function getGenreData(){
         ulElem.appendChild(liElem);
         
     });
-    
+
+}
+
+// API CALLS
+async function getTrendingMovies(){
+    try {
+        const response = await axios.get(`${URL}/${TRENDING_MOVIES_ENDPOINT}?${API_KEY}`);
+        const movies = response.data.results;
+
+        movies.forEach(movie => {      
+            const divElement = document.createElement('div');
+            divElement.classList.add('movie-container');
+
+            getAndDisplayMoviePosters(movie.poster_path, divElement, movie.id);
+
+            horizontalMenu.appendChild(divElement);
+            const trendingMovieTitle = document.createElement('h6');
+            trendingMovieTitle.innerHTML = movie.title;
+            divElement.appendChild(trendingMovieTitle);
+  
+        });
+    } 
+    catch (error) {
+        console.error(error);
+    }
+}
+
+async function getGenreData(){
+
+    const response = await fetch(`${URL}/${GENRE_ENDPOINT}?${API_KEY}`);
+    const data = await response.json();
+    const genresArray = data.genres;
+
+    categoriesSection.innerHTML = '';
+
+    createCategoriesList(categoriesSection, genresArray);
+ 
 }
 
 
@@ -132,10 +114,8 @@ async function getMoviesByGenre(){
 
     moviesByGenreArray.forEach(movie => {
 
-        const imgElem = document.createElement('img');
-        genericSection.appendChild(imgElem);
-        imgElem.src = `${POSTER_URL}/${movie.poster_path}`;
-        
+        getAndDisplayMoviePosters(movie.poster_path, genericSection, movie.id);
+
     });
 
 }
@@ -155,10 +135,7 @@ async function  searchMoviesByButton(){
 
     moviesBySearchQuery.forEach(movie => {
 
-        const imgElem = document.createElement('img');
-        genericSection.appendChild(imgElem);
-        imgElem.src = `${POSTER_URL}/${movie.poster_path}`;
-        
+        getAndDisplayMoviePosters(movie.poster_path, genericSection, movie.id)        
     });
 
     console.log(data.results);
@@ -174,10 +151,8 @@ async function getMoviesByTrend(){
         genericSection.innerHTML = '';
 
             movies.forEach(movie => {
-               
-                const imgElem = document.createElement('img');
-                genericSection.appendChild(imgElem);
-                imgElem.src = `${POSTER_URL}/${movie.poster_path}`;
+
+                getAndDisplayMoviePosters(movie.poster_path, genericSection, movie.id);
 
             });
     } catch (error) {
@@ -195,43 +170,37 @@ async function getMovieDetails(id){
 
         movieDetailCategories.innerHTML = '';
 
-        // console.log(movie);
-        const imgElem = document.createElement('img');
-        imgElem.src = `${POSTER_URL}/${movie.poster_path}`;
-        movieDetailPoster.appendChild(imgElem);
-        const ulElem = document.createElement('ul');
-        movieDetailCategories.appendChild(ulElem);
+        // for the main Poster
+        getAndDisplayMoviePosters(movie.poster_path, movieDetailPoster, id);
 
+         // To add Movie Title and Description
         movieDetailTitle.textContent = movie.title;
         movieDescription.textContent = movie.overview;
-        console.log(movie.genres)
 
-        
+        // To create categories and dispplay them
+        createCategoriesList(movieDetailCategories, movie.genres);
 
-        movie.genres.forEach(genre => {
-            const liElem = document.createElement('li');
-            liElem.setAttribute('id', 'id' + genre.id);
-            liElem.textContent = genre.name;
-            ulElem.appendChild(liElem);
+        // To get related movies and display them
+        getRelatedMovies(id);
 
-            liElem.addEventListener('click', () => { 
-                location.hash = `#category=${genre.id}-${genre.name}`;
-                genericTitle.textContent = genre.name;
-    
-                getMoviesByGenre();
-    
-             })
-    
-            liElem.innerHTML = genre.name;
-            // aElem.setAttribute('href', `${URL}/${BY_GENRE_ENDPOINT}?${API_KEY}&with_genres=${genreId}`);
-    
-            // liElem.appendChild(aElem);
-            ulElem.appendChild(liElem);
-            console.log(genre.name);
-        })
+    }
+    catch(error){
+        console.error(error);
+    }
+}
 
-        
-        
+async function getRelatedMovies(movieId){
+
+    relatedMoviesSection.innerHTML  = "";
+
+    try {
+        const response = await axios.get(`${URL}/movie/${movieId}/similar?${API_KEY}`);
+        const similarMovies = response.data.results;
+        // console.log("SIMILAR MOVIES", similarMovies);
+        similarMovies.forEach( movie => {
+
+            getAndDisplayMoviePosters(movie.poster_path, relatedMoviesSection, movie.id);
+    });
 
     }
     catch(error){

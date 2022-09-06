@@ -16,4 +16,9 @@ const movieDetailPoster = document.getElementById('background_poster');
 const movieDetailTitle = document.querySelector('.movie-title');
 const movieDescription = document.querySelector('.movie-description');
 const movieDetailCategories = document.querySelector('#movie_detail_categories');
+const relatedMoviesSection = document.querySelector('#related_movies');
+
+
+
+
 

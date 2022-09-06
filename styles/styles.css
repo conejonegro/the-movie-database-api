@@ -12,13 +12,19 @@ body{
 #search-box .input-group{
   justify-content: space-between;
 }
+a{
+  text-decoration: none;
+}
+a:visited {
+  color: white;
+}
 
 div.scrollmenu {
   background-color: #333;
   overflow: auto;
   white-space: nowrap;
 }
-#horizontal-scrollmenu img{
+#horizontal-scrollmenu img, #related_movies img, #generic_section img, #back_arrow{
   cursor: pointer;
 }
 
