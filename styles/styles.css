@@ -99,3 +99,9 @@ div.scrollmenu a:hover {
 #generic_section img{
   max-width: 250px;
 }
+
+#categorias ul{
+  display: grid;
+  grid-template-columns: 200px 200px 200px;
+  margin: 0 auto;
+}
