@@ -105,3 +105,14 @@ div.scrollmenu a:hover {
   grid-template-columns: 200px 200px 200px;
   margin: 0 auto;
 }
+#related_movies, #generic_section{
+  display: flex;
+    flex-wrap: wrap;
+    max-width: 1440px;
+    justify-content: space-between;
+    gap: 16px;
+}
+#generic_section>h2{
+  display: block;
+    width: 100%;
+}
